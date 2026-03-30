@@ -4,16 +4,18 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "msg2phone"
-version = "0.1.0"
+version = "0.1.1"
 description = "Simple notification helper to push messages to phone."
 readme = "README.md"
 requires-python = ">=3.10"
-repository = "https://github.com/Hzwx158/msg2phone_project"
 dependencies = [
 	"requests>=2.0",
 	"PyYAML>=6.0",
+	"typer>=0.9.0",
 ]
 
 [project.scripts]
-msg2phone-cli = "msg2phone.cli:main"
+msg2phone-cli = "msg2phone.cli:app"
 
+[tools.setuptools]
+packages=["msg2phone"]
