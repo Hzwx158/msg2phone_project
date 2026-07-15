@@ -1,0 +1,10 @@
+default:
+  - ServerCyannMessager
+  - url: "<server-cyann-url>"
+
+user2:
+  - FeishuMessager
+  - app_id: <app_id>
+    app_secret: <app_secret>
+    user_open_id: <user_open_id>
+    
