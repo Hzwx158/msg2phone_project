@@ -36,7 +36,7 @@ msg2phone-cli config --file "你的yaml文件路径"
 
 ```
 
-#### 2.1 选项 A：Server酱配置（推送至微信）
+#### 2.1 选项 A：Server酱配置
 
 1. 🚀 在 [Server酱官网](https://sc3.ft07.com/) 注册账号，并下载其官方 APP。
 2. 🤗 登录后，查看并复制你的 **API URL (SendKey)**（[在此查看](https://sc3.ft07.com/sendkey)）。

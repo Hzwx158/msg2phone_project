@@ -8,8 +8,10 @@ def get_config_file(default_real_file:Path|None = None):
     if not CONFIG_PATH.exists():
         if not CONFIG_PATH.parent.exists():
             CONFIG_PATH.parent.mkdir(parents=True)
-        assert default_real_file is not None, f"must offer a config file as a link, use `msg2phone-cli config` to set a config first"
-        CONFIG_PATH.symlink_to(default_real_file)
+        if default_real_file is not None:
+            CONFIG_PATH.symlink_to(default_real_file)
+        else:
+            CONFIG_PATH.touch()
     return CONFIG_PATH
 
 def relink_config_file(real_file:Path):
