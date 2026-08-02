@@ -1,0 +1,7 @@
+interface:
+  display_name: "Msg2phone"
+  short_description: "Send safe workspace notifications and owner updates"
+  default_prompt: "Use $msg2phone to send this workspace notification safely."
+
+policy:
+  allow_implicit_invocation: true
