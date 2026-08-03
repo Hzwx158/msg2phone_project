@@ -2,4 +2,4 @@ build
 msg2phone.egg-info
 tmp.txt
 msg2phone/config.yaml
-/examples/test.py
+uv.lock

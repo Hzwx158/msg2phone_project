@@ -17,5 +17,5 @@ dependencies = [
 [project.scripts]
 msg2phone-cli = "msg2phone.cli:app"
 
-[tools.setuptools]
+[tool.setuptools]
 packages=["msg2phone"]
