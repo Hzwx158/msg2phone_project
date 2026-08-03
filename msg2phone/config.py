@@ -21,7 +21,7 @@ def relink_config_file(real_file:Path):
 def update_config(new_cfg:dict[str, Any], **kwargs):
     new_cfg.update(kwargs)
     with open(get_config_file(), 'r') as f:
-        cfg = yaml.safe_load(f)
+        cfg = yaml.safe_load(f) or {}
     cfg.update(new_cfg)
     with open(get_config_file(), 'w') as f:
         yaml.safe_dump(cfg, f)
