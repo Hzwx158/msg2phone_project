@@ -51,7 +51,7 @@ class InfoExitHandler(ExitHandler):
         self.messager = Messager.from_config(name)
 
     def on_success_exit(self):
-        if not is_main_process():
+        if not is_main_process(False):
             return
         
         self.messager.info(
@@ -62,7 +62,7 @@ class InfoExitHandler(ExitHandler):
         )
     
     def on_fail_exit(self, *exc_args):
-        if not is_main_process():
+        if not is_main_process(False):
             return
         msg = self.format_error(*exc_args)
         self.messager.info(
