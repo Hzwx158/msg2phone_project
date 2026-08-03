@@ -2,10 +2,28 @@ from typing import Callable
 import requests
 import json
 from pathlib import Path
-from torch import distributed as tdst
 from msg2phone.exit_handler import ExitHandler
 from msg2phone.messager import Messager, MessageString
 import yaml
+
+def is_main_process(cached=True) -> bool:
+    """Check if the current process is the main process.
+    Args:
+        cached (bool): Whether to cache the result. Default is True.
+    Returns:
+        bool: True if the current process is the main process, False otherwise.
+    """
+    try:
+        from torch import distributed as tdst
+        if cached and hasattr(is_main_process, ":is_main_process"):
+            return getattr(is_main_process, ":is_main_process")
+        
+        res = not tdst.is_initialized() or tdst.get_rank() == 0
+        if cached:
+            setattr(is_main_process, ":is_main_process", res)
+        return res
+    except ImportError:
+        return True
 
 class InfoExitHandler(ExitHandler):
     def __init__(
@@ -33,7 +51,7 @@ class InfoExitHandler(ExitHandler):
         self.messager = Messager.from_config(name)
 
     def on_success_exit(self):
-        if tdst.is_initialized() and tdst.get_rank() != 0:
+        if not is_main_process():
             return
         
         self.messager.info(
@@ -44,7 +62,7 @@ class InfoExitHandler(ExitHandler):
         )
     
     def on_fail_exit(self, *exc_args):
-        if tdst.is_initialized() and tdst.get_rank() != 0:
+        if not is_main_process():
             return
         msg = self.format_error(*exc_args)
         self.messager.info(
